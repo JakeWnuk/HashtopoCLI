@@ -4,6 +4,7 @@ import argparse
 import datetime as dt
 import re
 import sys
+import os
 
 import requests
 import yaml
@@ -185,7 +186,7 @@ class HashtopolisApi:
             validate_user_input(name)
         else:
             exit()
-        message(f'Creating {name}:', title=True, quiet=args.quiet)
+        message(f'Creating SuperTask: {name}:', title=True, quiet=args.quiet)
         for itr in input_lst:
             message(itr, stat=True)
         data = {
@@ -212,7 +213,7 @@ if __name__ == '__main__':
     apiObj.getCracked('325')
     apiObj.importSuperTask(['?u?u?u?u?l?l?l?l?l?l?d?d?d?d?d', '?u?u?u?u?l?l?l?l?l?l?d?d?d?d?s'], 'test')
     """
-    config = yaml.safe_load(open('config.yml'))
+    config = yaml.safe_load(open(os.path.join(sys.path[0], 'config.yml')))
     userAuth = HashtopolisAuth(config['url'], config['key'])
     apiObj = HashtopolisApi(userAuth)
 

@@ -74,7 +74,7 @@ $ python3 hashtopocli.py -c 325
 Importing Masks:
 ```
 $ python3 hashtopocli.py -m masks.txt
-[12:52:43] Creating masks.txt:
+[12:52:43] Creating SuperTask: masks.txt:
 ?d?d?d
 ?s?s?s
 ?l?l?l?l?l?l?l?l?s?d?d?d?d
@@ -97,4 +97,4 @@ git clone
 ```
 pip install -r requirements.txt
 ```
-Docker soon.
+Recommended to use Docker to store your configuration file.
