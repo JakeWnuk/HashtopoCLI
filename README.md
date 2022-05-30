@@ -9,7 +9,7 @@ HashtopoCLI
 - [Usage](#usage)
 - [Install](#install)
 
- CLI tool for [Hashtopolis](https://github.com/hashtopolis/server) incorperating some of the API functionality into a dynamic Python wrapper. Input is accepted via the `-i` flag and `stdin` and accepts strings and files. Output is neatly printed to the CLI in a minimalistic format.
+ CLI tool for [Hashtopolis](https://github.com/hashtopolis/server) incorporating some of the API functionality into a dynamic Python wrapper. Input is accepted via the `-i` flag and `stdin` and accepts strings and files. Output is neatly printed to the CLI in a minimalistic format.
 
 ## Usage
 Only a few API calls are implemented:
