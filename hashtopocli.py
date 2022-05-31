@@ -59,7 +59,7 @@ class HashtopolisAuth:
         @return: url if valid
         """
         validate_user_input(url)
-        response = requests.get(url=url)
+        response = requests.get(url=url, verify=False)
         if response.status_code != 200:
             message('Error validating URL!', title=True, quiet=args.quiet)
             exit()
@@ -74,7 +74,7 @@ class HashtopolisAuth:
         """
         validate_user_input(url)
         data = {'section': 'test', 'request': 'connection'}
-        response = requests.post(url, json=data)
+        response = requests.post(url, json=data, verify=False)
         if response.json()['response'] != 'SUCCESS':
             message('Error validating API endpoint!', title=True, quiet=args.quiet)
             exit()
@@ -85,7 +85,7 @@ class HashtopolisAuth:
         Tests authentication to the API
         """
         data = {'section': 'test', 'request': 'access', 'accessKey': self.apiToken}
-        response = requests.post(self.apiEndpoint, json=data)
+        response = requests.post(self.apiEndpoint, json=data, verify=False)
         if response.json()['response'] != 'OK':
             message('Error authenticating to the API!', title=True, quiet=args.quiet)
             exit()
@@ -98,7 +98,7 @@ class HashtopolisAuth:
         @return: JSON response
         """
         data['accessKey'] = self.apiToken
-        response = requests.post(self.apiEndpoint, json=data)
+        response = requests.post(self.apiEndpoint, json=data, verify=False)
         if not silent:
             message(f'Requesting {data["request"]}...', title=True, quiet=args.quiet)
         return response.json()
@@ -216,6 +216,7 @@ if __name__ == '__main__':
     config = yaml.safe_load(open(os.path.join(sys.path[0], 'config.yml')))
     userAuth = HashtopolisAuth(config['url'], config['key'])
     apiObj = HashtopolisApi(userAuth)
+    requests.packages.urllib3.disable_warnings(requests.packages.urllib3.exceptions.InsecureRequestWarning)
 
     parser = argparse.ArgumentParser(description='CLite for Hashtopolis')
     parser.add_argument("-i", "--input", action="store", default=False, help='Input list of hashes or single hash')
