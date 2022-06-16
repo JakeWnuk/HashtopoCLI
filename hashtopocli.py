@@ -146,6 +146,24 @@ class HashtopolisApi:
         except KeyError:
             pass
 
+    def get_task_cracked(self, input_id):
+        """
+        Retrieve all cracked hashes of a given task.
+        @param input_id: input taskId to search
+        """
+        validate_user_input(input_id)
+        data = {
+            "section": "task",
+            "request": "getCracked",
+            "taskId": str(input_id)
+        }
+        response = self.api.api_request(data, silent=True)
+        try:
+            for itr in response['cracked']:
+                message(itr['hash'] + ':' + itr['plain'], stat=True)
+        except KeyError:
+            pass
+
     def get_hashlist(self, input_id):
         """
         Get information about a specific hashlist.
@@ -206,13 +224,6 @@ class HashtopolisApi:
 
 
 if __name__ == '__main__':
-    """
-    Samples:
-    apiObj.getHash('8846F7EAEE8FB117AD06BDD830B7586C')
-    apiObj.listHashlist()
-    apiObj.getCracked('325')
-    apiObj.importSuperTask(['?u?u?u?u?l?l?l?l?l?l?d?d?d?d?d', '?u?u?u?u?l?l?l?l?l?l?d?d?d?d?s'], 'test')
-    """
     config = yaml.safe_load(open(os.path.join(sys.path[0], 'config.yml')))
     userAuth = HashtopolisAuth(config['url'], config['key'])
     apiObj = HashtopolisApi(userAuth)
@@ -222,6 +233,7 @@ if __name__ == '__main__':
     parser.add_argument("-q", "--quiet", action="store_true", default=False, help="Hides titles")
     parser.add_argument("-l", "--list", action="store_true", default=False, help="Lists available hashlists")
     parser.add_argument("-c", "--cracked", action="store", default=False, help="Gets cracks from a hashlistId")
+    parser.add_argument("-t", "--task", action="store", default=False, help="Gets cracks from a taskId")
     parser.add_argument("-m", "--masks", action="store", default=False,
                         help="Imports a list of Hashcat masks to a new super task")
     args = parser.parse_args()
@@ -251,6 +263,16 @@ if __name__ == '__main__':
             for i in args.cracked.split('\n'):
                 input_str = validate_user_input(str(i))
                 apiObj.get_cracked(input_str)
+    elif args.taskcracked:
+        try:
+            with open(args.taskcracked) as file:
+                while i := file.readline().rstrip():
+                    validate_user_input(i)
+                    apiObj.get_task_cracked(i)
+        except FileNotFoundError:
+            for i in args.taskcracked.split('\n'):
+                input_str = validate_user_input(str(i))
+                apiObj.get_task_cracked(input_str)
     elif args.masks:
         try:
             mask_lst = []
