@@ -14,12 +14,12 @@ HashtopoCLI
 ## Usage
 Only a few API calls are implemented:
 - `getHash` &rarr;  Search if a hash is found on the server.
-- `getCracked` &rarr;  Retrieve all cracked hashes of a given hashlist.
+- `getCracked` &rarr;  Retrieve all cracked hashes of a given hashlist or task.
 - `listHashlists` & `getHashlist` &rarr; Lists all the hashlists with information.
 - `importSupertask` &rarr; Create a supertask configuration with a given list of masks.
 
 ```
-usage: hashtopocli.py [-h] [-i INPUT] [-q] [-l] [-c CRACKED] [-m MASKS]
+usage: hashtopocli.py [-h] [-i INPUT] [-q] [-l] [-c CRACKED] [-t TASK] [-m MASKS]
 
 CLite for Hashtopolis
 
@@ -31,6 +31,7 @@ optional arguments:
   -l, --list            Lists available hashlists
   -c CRACKED, --cracked CRACKED
                         Gets cracks from a hashlistId
+  -t TASK, --task TASK  Gets cracks from a taskId
   -m MASKS, --masks MASKS
                         Imports a list of Hashcat masks to a new super task
 ```
