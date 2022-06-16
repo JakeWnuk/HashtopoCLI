@@ -264,14 +264,14 @@ if __name__ == '__main__':
             for i in args.cracked.split('\n'):
                 input_str = validate_user_input(str(i))
                 apiObj.get_cracked(input_str)
-    elif args.taskcracked:
+    elif args.task:
         try:
-            with open(args.taskcracked) as file:
+            with open(args.task) as file:
                 while i := file.readline().rstrip():
                     validate_user_input(i)
                     apiObj.get_task_cracked(i)
         except FileNotFoundError:
-            for i in args.taskcracked.split('\n'):
+            for i in args.task.split('\n'):
                 input_str = validate_user_input(str(i))
                 apiObj.get_task_cracked(input_str)
     elif args.masks:
