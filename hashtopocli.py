@@ -87,7 +87,8 @@ class HashtopolisAuth:
         data = {'section': 'test', 'request': 'access', 'accessKey': self.apiToken}
         response = requests.post(self.apiEndpoint, json=data, verify=False)
         if response.json()['response'] != 'OK':
-            message('Error authenticating to the API!', title=True, quiet=args.quiet)
+            message('Error authenticating to the API!', title=True)
+            message(response.json()['message'], title=True)
             exit()
 
     def api_request(self, data, silent=False):
