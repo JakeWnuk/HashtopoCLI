@@ -85,7 +85,7 @@ $ python3 hashtopocli.py -m masks.txt
 [12:52:43] Requesting importSupertask...
 OK
 ```
-Use [PwdStat](https://github.com/JakeWnuk/PwdStat) to get a list of masks quickly from cracked hashes.
+Use [PwdStat](https://github.com/JakeWnuk/PwdStat) or [maskcat](https://github.com/JakeWnuk/maskcat) to get a list of masks quickly from cracked hashes.
 
 ## Install
 
