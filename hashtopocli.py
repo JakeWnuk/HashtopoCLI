@@ -34,7 +34,7 @@ def validate_user_input(user_input_str):
     @return: string if valid otherwise break
     """
 
-    if bool(re.match('^[abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890:\/.?]+$', str(user_input_str))):
+    if bool(re.match('^[abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890:\/.-_?]+$', str(user_input_str))):
         return user_input_str
     else:
         message('Error validating user input!', title=True, quiet=args.quiet)
