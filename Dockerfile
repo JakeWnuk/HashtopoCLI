@@ -14,5 +14,5 @@ FROM python:slim
 COPY --from=build /opt/venv /opt/venv
 ADD ./config.yml /opt/venv/bin/config.yml
 ENV PATH="/opt/venv/bin:$PATH"
-
-ENTRYPOINT ["/opt/venv/bin/hashtopocli.py"]
+RUN apt-get update; apt-get install -y tini; rm -rf /var/lib/apt/lists/*
+ENTRYPOINT ["/usr/bin/tini", "--","/opt/venv/bin/hashtopocli.py"]
